@@ -1,0 +1,107 @@
+---
+#play 1
+- hosts: localhost
+  vars_files:
+    - vars.yml
+  sudo: yes
+  user: root
+  connection: local
+  gather_facts: False
+#  roles:
+#  - { role: rvm_io.rvm1-ruby, tags: ruby, sudo: True }
+  tasks:
+  - name: make doc osmium
+    command: "make doc chdir=/opt/osmium/"
+  - name: make install osmium
+    command: "make install chdir=/opt/osmium/"
+  - name: make osm-history-splitter
+    command: "make chdir=/opt/osm-history-splitter/" 
+  - name: add rvm to bashrc
+    lineinfile: dest=/home/{{ ansible_ssh_user }}/.bashrc line="source /etc/profile.d/rvm.sh"
+  - name: clone repo 6
+    git: clone=yes repo=https://github.com/google/protobuf dest=/opt/protobuf
+  - name: autogen protobuf
+    command: "./autogen.sh chdir=/opt/protobuf/"
+  - name: configure protobuf
+    command: "./configure chdir=/opt/protobuf/"
+  - name: make protobuf
+    command: "make chdir=/opt/protobuf/"
+  - name: make check protobuf
+    command: "make check chdir=/opt/protobuf/"
+  - name: make install protobuf
+    command: "make install chdir=/opt/protobuf/"
+  - name: clone repo 7
+    git: clone=yes repo=https://github.com/protobuf-c/protobuf-c dest=/opt/protobuf-c
+  - name: autogen protobuf
+    command: "./autogen.sh chdir=/opt/protobuf-c/"
+  - name: configure protobuf
+    command: "./configure chdir=/opt/protobuf-c/"
+  - name: sudo ldconfig
+    command: ldconfig
+  - name: make 
+    command: "make chdir=/opt/protobuf-c/"
+  - name: make install protobuf
+    command: "make install chdir=/opt/protobuf-c/"
+  - name: change permissions
+    file: path=/opt owner={{ ansible_ssh_user }} group={{ ansible_ssh_user }} state=directory recurse=yes
+  - name: change permissions
+    file: path=/usr/local/rvm owner={{ ansible_ssh_user }} group={{ ansible_ssh_user }} state=directory recurse=yes 
+
+
+#play 2
+#- hosts: localhost
+#  sudo: yes
+#  connection: local
+#  gather_facts: False
+#  tasks:
+#  - name: bundler install
+#    command: "bundle install chdir=/opt/osm-history/"
+
+#play 3
+#- hosts: all
+#  sudo_user: postgres
+#  sudo: yes
+#  gather_facts: no
+
+#  tasks:
+#  - name: create database
+#    postgresql_db: name=vagrant
+#  - name: create vagrant postgres user
+#    postgresql_user: db=vagrant name=vagrant password=vagrant priv=ALL role_attr_flags=CREATEDB,CREATEUSER
+
+#play 4, install node js from source
+- hosts: localhost
+  sudo: yes
+  user: root
+  connection: local
+  gather_facts: False
+  vars:
+    repo_basedir: ..
+    node_version: "0.10.12"
+    node_prefix: "node-v{{node_version}}"
+    node_tarball: "{{node_prefix}}.tar.gz"
+    node_path: "/usr/local"
+  tasks:
+  - name: Node.js | Checking installed version of node.js
+    shell: /usr/bin/test "$(node -v 2> /dev/null)" = v{{node_version}}
+    register: wanted_version_installed
+    ignore_errors: True
+  - name: Node.js | Fetching node.js source
+    action: get_url url=http://nodejs.org/dist/v{{node_version}}/{{node_tarball}} dest=/tmp/
+    when: wanted_version_installed.rc == 1
+  - name: Node.js | Unpack node.js tarball
+    command: tar zxf {{node_tarball}} chdir=/tmp
+    when: wanted_version_installed.rc == 1
+  - name: Node.js | Configure
+    shell: /usr/bin/python ./configure --prefix={{node_path}} chdir=/tmp/{{node_prefix}}
+    when: wanted_version_installed.rc == 1
+  - name: Node.js | Make
+    shell: /usr/bin/make chdir=/tmp/{{node_prefix}}/
+    when: wanted_version_installed.rc == 1
+  - name: Node.js | Make install
+    shell: /usr/bin/make install chdir=/tmp/{{node_prefix}}/
+    when: wanted_version_installed.rc == 1
+
+
+
+
