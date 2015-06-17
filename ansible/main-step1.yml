@@ -16,9 +16,12 @@
     sudo_user: root
     with_items: 
       - "{{ system_packages }}"
-  - name: install jekyll 
-    command: "gem install jekyll"
-
-
+  # name: change permissions of rvm dir
+  - file: path=/usr/local/rvm owner=vagrant group=vagrant mode=777 recurse=yes
+#need to find a better way to source rvm
+#  - name: add rvm to bashrc
+#   lineinfile: dest=/home/vagrant/.bashrc line="source /usr/local/rvm/scripts/rvm"
+#  - name: install jekyll 
+#    command: "gem install jekyll"
 
 
