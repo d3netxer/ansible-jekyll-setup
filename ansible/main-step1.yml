@@ -24,10 +24,11 @@
     file: path=/usr/local/rvm owner={{ remote_user }} group={{ remote_user }} state=directory recurse=yes 
   - name: add rvm to bashrc
     lineinfile: dest=/etc/bash.bashrc line="/usr/local/rvm/scripts/rvm"
-#  name: change permissions of rvm dir
-#  - file: path=/usr/local/rvm owner=vagrant group=vagrant mode=777 recurse=yes
-#need to find a better way to source rvm
-#  - name: install jekyll 
-#    command: "gem install jekyll"
+  - name: reload bash.bashrc file
+    command: "source /etc/bash.bashrc" 
+  - name: install jekyll 
+    command: "gem install jekyll"
+
+
 
 
