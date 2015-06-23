@@ -1,5 +1,6 @@
 ---
 - hosts: localhost
+  remote_user: vagrant
   vars_files:
     - vars.yml
   sudo: yes
@@ -16,8 +17,12 @@
     sudo_user: root
     with_items: 
       - "{{ system_packages }}"
+  - name: change permissions
+    file: path=/opt owner={{ remote_user }} group={{ remote_user }} state=directory recurse=yes
+  - name: change permissions
+    file: path=/usr/local/rvm owner={{ remote_user }} group={{ remote_user }} state=directory recurse=yes 
   # name: change permissions of rvm dir
-  - file: path=/usr/local/rvm owner=vagrant group=vagrant mode=777 recurse=yes
+#  - file: path=/usr/local/rvm owner=vagrant group=vagrant mode=777 recurse=yes
 #need to find a better way to source rvm
 #  - name: add rvm to bashrc
 #   lineinfile: dest=/home/vagrant/.bashrc line="source /usr/local/rvm/scripts/rvm"

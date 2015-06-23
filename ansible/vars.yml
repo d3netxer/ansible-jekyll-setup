@@ -8,5 +8,6 @@ system_packages:
   - vim
   - unzip
   - nginx
+  - nodejs 
 
 
