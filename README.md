@@ -21,3 +21,5 @@ rvm tips: https://www.digitalocean.com/community/tutorials/how-to-install-ruby-o
 tips on Linux file permissions: http://linuxcommand.org/lts0070.php
 
 how to deploy jekyll blogs with git: https://www.digitalocean.com/community/tutorials/how-to-deploy-jekyll-blogs-with-git
+
+http://bencane.com/2013/09/16/understanding-a-little-more-about-etcprofile-and-etcbashrc/
