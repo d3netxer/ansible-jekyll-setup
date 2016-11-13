@@ -14,6 +14,9 @@ Use Ansible to provision an Ubuntu trusty (14.04) instance to run Jekyll.
 
 
 ### other notes
+
+using rvm1-ansible role from:  https://github.com/rvm/rvm1-ansible
+
 http://stackoverflow.com/questions/13246429/i-am-getting-rvm-command-not-found-after-installation-of-rvm
 
 rvm tips: https://www.digitalocean.com/community/tutorials/how-to-install-ruby-on-rails-on-ubuntu-14-04-using-rvm
