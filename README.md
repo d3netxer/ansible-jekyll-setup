@@ -1,6 +1,6 @@
 # ansible-jekyll-setup
 
-Use Ansible to provision an Ubuntu trusty (14.04) instance to run Jekyll.
+Use Ansible to provision an Ubuntu Xenial (16.04) instance to run Jekyll.
 
 -You can easily test this by just starting up a basic Ubuntu machine on VirtualBox or by using Vagrant
 
