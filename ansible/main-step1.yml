@@ -36,18 +36,16 @@
     shell: source /home/ubuntu/.bashrc && source /etc/bash.bashrc
     args:
        executable: /bin/bash
-#    command: "source /etc/bash.bashrc"
   - name: source rvm
     sudo: no
-    shell: source /home/ubuntu/.bashrc && source ~/.rvm/scripts/rvm
+    shell: source /usr/local/rvm/scripts/rvm
     args:
        executable: /bin/bash 
   - name: install jekyll
     sudo: no
-    shell: source /home/ubuntu/.bashrc && gem install jekyll
+    shell: gem install jekyll
     args:
        executable: /bin/bash 
-   # command: "gem install jekyll"
 
 
 
