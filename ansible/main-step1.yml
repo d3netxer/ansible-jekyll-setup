@@ -31,12 +31,17 @@
     file: path=/usr/local/rvm owner={{ remote_user }} group={{ remote_user }} state=directory recurse=yes 
   - name: add rvm to bashrc
     lineinfile: dest=/etc/bash.bashrc line="/usr/local/rvm/scripts/rvm"
-  - name: reload bash bashrc file
+  - name: reload bash.bashrc file
     sudo: no   
     shell: source /home/ubuntu/.bashrc && source /etc/bash.bashrc
     args:
        executable: /bin/bash
-#    command: "source /etc/bash.bashrc" 
+#    command: "source /etc/bash.bashrc"
+  - name: source rvm
+    sudo: no
+    shell: source /home/ubuntu/.bashrc && source ~/.rvm/scripts/rvm
+    args:
+       executable: /bin/bash 
   - name: install jekyll
     sudo: no
     shell: source /home/ubuntu/.bashrc && gem install jekyll
