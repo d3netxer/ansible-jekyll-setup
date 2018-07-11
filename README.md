@@ -17,6 +17,8 @@ Use Ansible to provision an Ubuntu Xenial (16.04) instance to run Jekyll.
 
 ### other notes
 
+- You may need to source rvm after running ansible, ex: ```source /usr/local/rvm/scripts/rvm```
+
 using rvm1-ansible role from:  https://github.com/rvm/rvm1-ansible
 
 http://stackoverflow.com/questions/13246429/i-am-getting-rvm-command-not-found-after-installation-of-rvm
