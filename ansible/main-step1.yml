@@ -1,8 +1,8 @@
 ---
 - hosts: localhost
   vars:
-    remote_user: vagrant
-    #remote_user: ubuntu
+    #remote_user: vagrant
+    remote_user: ubuntu
   vars_files:
     - vars.yml
   sudo: yes
