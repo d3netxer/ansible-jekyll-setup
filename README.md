@@ -11,6 +11,7 @@ Use Ansible to provision an Ubuntu Xenial (16.04) instance to run Jekyll.
 2. Navigate to the script directory and run the ansible shell script ('source ansible.sh'). This will install ansible.
 
 3. Install the rvm1-ansible role by running this command: ```ansible-galaxy install rvm_io.ruby```
+  - (repo used is https://github.com/rvm/rvm1-ansible, in Oct 2018 the command changed to ```ansible-galaxy install rvm.ruby```)
 
 4. Navigate to the ansible directory and run the main-step1 playbook ('ansible-playbook main-step1.yml')
 
