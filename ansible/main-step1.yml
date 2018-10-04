@@ -10,7 +10,7 @@
   connection: local
   gather_facts: False
   roles:
-  - { role: rvm_io.ruby,
+  - { role: rvm.ruby,
       tags: ruby,
       sudo: True, 
       rvm1_rubies: ['ruby-2.3.1'],
